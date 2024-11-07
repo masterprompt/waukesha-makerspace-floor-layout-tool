@@ -15,9 +15,15 @@ import modularShelvesWide from './modular-shelves-wide.png';
 import palletRacks from './pallet-racks.png';
 import wireRackShelves from './wire-rack-shelves.png';
 
+function randInt(min: number, max: number) {
+  const range = max-min;
+  return min + Math.floor(Math.random() * range);
+}
+
 const furniture: {[key: string]: string} = {
   mainBench,
-  heavyMetalShelf,
+  heavyMetalShelf1:heavyMetalShelf,
+  heavyMetalShelf2:heavyMetalShelf,
   liquidsCabinet,
   blackToolBox,
   redToolBox,
@@ -46,8 +52,8 @@ const images: IImage[] = [
       },
       ...Object.keys(furniture).map(k => ({
         id: k,
-        x: 0,
-        y: 0,
+        x: randInt(-602, 1354),
+        y: randInt(-594, 516),
         src: furniture[k],
         draggable: true,
         rotation: 0

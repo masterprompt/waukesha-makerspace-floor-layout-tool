@@ -62,6 +62,11 @@ export const Image = ({
       onDragEnd={(e) => {
         image.x = e.target.x();
         image.y = e.target.y();
+        console.log({
+          name: image.id,
+          x: image.x,
+          y: image.y
+        })
         setDirty();
       }}
     />
