@@ -1,6 +1,6 @@
 # Waukesha Makerspace Floor Plan Tool
 
-Layout tool for creating a floor plan.  Live demo can be seen [here](https://masterprompt.github.io/waukesha-makerspace-floor-layout-tool)
+Layout tool for creating a floor plan interactively!  Live demo can be seen [here](https://masterprompt.github.io/waukesha-makerspace-floor-layout-tool)!
 
 ## Run locally
 
