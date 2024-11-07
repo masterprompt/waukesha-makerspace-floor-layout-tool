@@ -10,6 +10,16 @@ interface Props {
   selected: boolean;
 }
 
+interface TransformRef {
+  nodes: (d: any) => void;
+  getLayer: () => {
+    batchDraw: () => void;
+  };
+}
+interface ShapeRef {
+  rotation: () => number;
+}
+
 export const Image = ({
   image,
   onSelect = () => {},
@@ -18,11 +28,13 @@ export const Image = ({
   const [img] = useImage(image.src);
   const shapeRef = React.useRef(null);
   const trRef = React.useRef(null);
+  const { setDirty } = useFurniture();
   React.useEffect(() => {
     if (selected) {
+      const transformRef = trRef.current as unknown as TransformRef;
       // we need to attach transformer manually
-      trRef?.current?.nodes([shapeRef.current]);
-      trRef?.current?.getLayer().batchDraw();
+      transformRef.nodes([shapeRef.current]);
+      transformRef.getLayer().batchDraw();
     }
   }, [selected]);
   const rotationSnaps = React.useMemo(() => {
@@ -50,6 +62,7 @@ export const Image = ({
       onDragEnd={(e) => {
         image.x = e.target.x();
         image.y = e.target.y();
+        setDirty();
       }}
     />
       {selected && (
@@ -60,6 +73,12 @@ export const Image = ({
           resizeEnabled={false}
           rotationSnaps={rotationSnaps}
           rotationSnapTolerance={20}
+          onTransformEnd={() => {
+            const node = shapeRef.current as unknown as ShapeRef;
+            const newRotation = node.rotation();
+            image.rotation = newRotation;
+            setDirty();
+          }}
         />
       )}
     </>

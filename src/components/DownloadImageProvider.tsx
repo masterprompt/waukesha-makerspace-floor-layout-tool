@@ -1,10 +1,15 @@
 import React from "react"
 import { createContextForController } from "react-controller-context";
 
+interface KonvaRef { 
+    toDataURL: () => string;
+}
+
 const useController = () => {
     const konvaRef = React.useRef(null);
     const downloadImage = React.useCallback(()=> {
-        const uri: string = (konvaRef.current && konvaRef.current.toDataURL()) as string;
+        const konvaUrlGenerator = konvaRef.current as unknown as KonvaRef
+        const uri: string = konvaUrlGenerator.toDataURL();
         const link = document.createElement('a');
         link.href = uri;
         link.download = 'Waukesha Makerspace Beta Floorplan Proposal';
