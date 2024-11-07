@@ -2,27 +2,7 @@ import { Image as KonvaImage, Transformer } from 'react-konva';
 import useImage from 'use-image';
 import { IImage } from '../types';
 import React from 'react';
-import { uniqueId } from 'lodash';
-import floorPlanImage from '../assets/floor-plan.jpg';
-import mainBench from '../assets/Main-Bench.png';
-
-const defaultImages: IImage[] = [
-  {
-    id: uniqueId(),
-    x: 0,
-    y: 0,
-    src: floorPlanImage,
-    draggable: false,
-  },
-  {
-    id: uniqueId(),
-    x: 0,
-    y: 0,
-    src: mainBench,
-    draggable: true,
-    rotation: 90
-  },
-];
+import { useFurniture } from './FurnitureProvider';
 
 interface Props {
   image: IImage;
@@ -45,6 +25,14 @@ export const Image = ({
       trRef?.current?.getLayer().batchDraw();
     }
   }, [selected]);
+  const rotationSnaps = React.useMemo(() => {
+    const angles:number[] = [];
+    const amount = 22.5;
+    for(let i=0; i<=360; i+=amount){
+      angles.push(i);
+    }
+    return angles;
+  }, []);
   return (
     <>
     <KonvaImage
@@ -69,7 +57,9 @@ export const Image = ({
           ref={trRef}
           flipEnabled={false}
           rotateEnabled={true}
-          resizeEnabled={false} 
+          resizeEnabled={false}
+          rotationSnaps={rotationSnaps}
+          rotationSnapTolerance={20}
         />
       )}
     </>
@@ -77,11 +67,11 @@ export const Image = ({
 };
 
 export const Images = () => {
-  const [images] = React.useState<IImage[]>(defaultImages);
+  const { furniture } = useFurniture();
   const [ selected, setSelected ] = React.useState<IImage['id'] | null>(null);
   return (
     <>
-      {images.map((image) => (
+      {furniture.map((image) => (
         <Image
           image={image}
           key={image.id}

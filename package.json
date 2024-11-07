@@ -10,9 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "bootstrap": "^5.3.3",
     "konva": "^9.3.16",
     "lodash": "^4.17.21",
     "react": "^18.3.1",
+    "react-bootstrap": "^2.10.5",
+    "react-bootstrap-icons": "^1.11.4",
+    "react-compose-provider": "^1.0.0",
+    "react-controller-context": "^1.0.7",
     "react-dom": "^18.3.1",
     "react-konva": "^18.2.10",
     "use-image": "^1.1.1"
