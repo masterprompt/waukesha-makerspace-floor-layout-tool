@@ -5,6 +5,7 @@ import { KonvaEventObject, Node, NodeConfig } from 'konva/lib/Node';
 import { Vector2d } from 'konva/lib/types';
 import { useDownloadImage } from './DownloadImageProvider';
 import { useZoom } from './ZoomProvider';
+import useMeasure from 'react-use-measure';
 
 
 export const Stage = () => {
@@ -21,6 +22,7 @@ export const Stage = () => {
   };
 
   return (
+    <div style={{ width: '100%'}}>
     <KonvaStage
       width={window.innerWidth}
       height={window.innerHeight}
@@ -34,5 +36,6 @@ export const Stage = () => {
         <Images />
       </Layer>
     </KonvaStage>
+    </div>
   )
 }
