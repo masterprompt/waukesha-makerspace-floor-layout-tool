@@ -12,6 +12,7 @@ export const Stage = () => {
   const { scale, zoom } = useZoom();
   const [ position ] = React.useState<Vector2d>({ x:838, y:443});
   const { konvaRef } = useDownloadImage();
+  const [ref, bounds] = useMeasure();
   const onWheel = (
     e: KonvaEventObject<WheelEvent, Node<NodeConfig>>
   ) => {
@@ -22,10 +23,10 @@ export const Stage = () => {
   };
 
   return (
-    <div style={{ width: '100%'}}>
+    <div style={{ width: '100%', height: '100%'}} ref={ref}>
     <KonvaStage
-      width={window.innerWidth}
-      height={window.innerHeight}
+      width={bounds.width}
+      height={bounds.height}
       scale={{ x: scale, y: scale }}
       onWheel={onWheel}
       position={position}
