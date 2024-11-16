@@ -16,7 +16,7 @@ export const LayoutLoader = () => {
         }, 5);
         return () => clearTimeout(timeout);
            
-    }, [furniture]);
+    }, []);
 
     return null;
 }

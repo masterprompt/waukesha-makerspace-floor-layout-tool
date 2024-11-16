@@ -1,14 +1,23 @@
 export interface ITransform {
-    id: number | string;
+    id: string;
     x: number;
     y: number;
-}
-
-export interface IImage extends ITransform {
-    src: string;
     draggable?: boolean;
     rotation?: number;
+    scalable?: boolean;
 }
+
+export interface IFurnishing extends ITransform {
+    src: string;
+
+}
+
+export interface IZone extends ITransform {
+    width: number;
+    height: number;
+}
+
+export type SelectableItem = IZone | IFurnishing;
 
 export enum PrimitiveType {
     Rectangle,
@@ -31,4 +40,22 @@ export interface ICircle extends IPrimitive {
 
 export interface IShape {
     primitives: IPrimitive[];
+}
+
+export interface TransformRef {
+    nodes: (d: any) => void;
+    getLayer: () => {
+      batchDraw: () => void;
+    };
+}
+
+type NumberGetSet = (v?: number) => number;
+export interface ShapeRef {
+    rotation: NumberGetSet;
+    scaleX: NumberGetSet;
+    scaleY: NumberGetSet;
+    x: NumberGetSet;
+    y: NumberGetSet;
+    width: NumberGetSet;
+    height: NumberGetSet;
 }

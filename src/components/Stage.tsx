@@ -1,11 +1,11 @@
 import React from 'react'
 import { Stage as KonvaStage, Layer } from 'react-konva';
-import { Images } from './Image';
 import { KonvaEventObject, Node, NodeConfig } from 'konva/lib/Node';
 import { Vector2d } from 'konva/lib/types';
 import { useDownloadImage } from './DownloadImageProvider';
 import { useZoom } from './ZoomProvider';
 import useMeasure from 'react-use-measure';
+import { Furnishings } from './Furnishings';
 
 
 export const Stage = () => {
@@ -34,7 +34,7 @@ export const Stage = () => {
       ref={konvaRef}
     >
       <Layer>
-        <Images />
+        <Furnishings />
       </Layer>
     </KonvaStage>
     </div>

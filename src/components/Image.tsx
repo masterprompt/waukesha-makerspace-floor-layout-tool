@@ -1,11 +1,11 @@
 import { Image as KonvaImage, Transformer } from 'react-konva';
 import useImage from 'use-image';
-import { IImage } from '../types';
+import { IFurnishing } from '../types';
 import React from 'react';
 import { useFurniture } from './FurnitureProvider';
 
 interface Props {
-  image: IImage;
+  image: IFurnishing;
   onSelect: () => void;
   selected: boolean;
 }
@@ -62,11 +62,6 @@ export const Image = ({
       onDragEnd={(e) => {
         image.x = e.target.x();
         image.y = e.target.y();
-        console.log({
-          name: image.id,
-          x: image.x,
-          y: image.y
-        })
         setDirty();
       }}
     />
@@ -92,7 +87,7 @@ export const Image = ({
 
 export const Images = () => {
   const { furniture } = useFurniture();
-  const [ selected, setSelected ] = React.useState<IImage['id'] | null>(null);
+  const [ selected, setSelected ] = React.useState<IFurnishing['id'] | null>(null);
   return (
     <>
       {furniture.map((image) => (

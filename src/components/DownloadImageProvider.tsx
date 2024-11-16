@@ -15,7 +15,6 @@ const useController = () => {
         link.download = 'Waukesha Makerspace Beta Floorplan Proposal';
         link.download = 'Waukesha Makerspace Beta Floorplan Proposal.png'
         link.click();
-        console.log(uri);
     },[konvaRef]);
     return {
         konvaRef,

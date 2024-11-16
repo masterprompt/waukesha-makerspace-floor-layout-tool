@@ -1,4 +1,4 @@
-import { IImage } from "../types";
+import { IFurnishing } from "../types";
 
 import floorPlanImage from './floor-plan.jpg';
 import mainBench from './Main-Bench.png';
@@ -41,13 +41,14 @@ const furniture: {[key: string]: string} = {
   wireRackShelves2: wireRackShelves,
 };
 
-const images: IImage[] = [
+const images: IFurnishing[] = [
     {
         id: 'floorPlanImage',
         x: 0,
         y: 0,
         src: floorPlanImage,
         draggable: false,
+        scalable: false,
         rotation: 90
       },
       ...Object.keys(furniture).map(k => ({

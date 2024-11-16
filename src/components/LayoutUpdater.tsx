@@ -9,9 +9,11 @@ export const LayoutUpdater = () => {
     const layoutService = useLayoutService();
 
     React.useEffect(() => {
+        /*
         if (debouncedLayout ) {
             layoutService.setLayoutToUrl(debouncedLayout);
         }
+            */
     }, [ debouncedLayout ]);
     return null;
 }
