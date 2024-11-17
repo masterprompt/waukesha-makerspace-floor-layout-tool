@@ -17,7 +17,7 @@ export const Image = ({
   const [img] = useImage(item.src);
   const shapeRef = React.useRef(null);
   const { setSelected } = useSelectedTransform();
-  const { onChange } = useItems();
+  const { updateItem: onChange } = useItems();
   return (
     <>
     <KonvaImage

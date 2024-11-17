@@ -1,11 +1,13 @@
 import React from 'react';
 import { useItems } from './ItemsProvider';
-import furniture from '../furniture';
+import { useFurnitureService } from '../hooks/useFurnitureService';
 
 export const FurnitureLoader = () => {
-    const { onChange } = useItems();
+    const { updateItem } = useItems();
+    const furnitureService = useFurnitureService();
     React.useEffect(() => {
-        furniture.forEach(onChange)
-    }, [furniture])
+        const furniture = furnitureService.loadFurniture();
+        furniture.forEach(updateItem);
+    }, [])
     return null;
 };

@@ -1,22 +1,19 @@
 import React from 'react';
 import { Rect as KonvaRect } from 'react-konva';
-import { IRect, IZone, ShapeRef } from '../types';
+import { IRect, ShapeRef } from '../types';
 import { useSelectedTransform } from './SelectedTransformProvider';
 import { ItemTransformer } from './ItemTransformer';
-
+import { useItems } from './ItemsProvider';
 interface Props {
     item: IRect;
-    onChange?: (zone: IZone) => void;
 }
 
 export const Rect = ({
     item,
-    onChange = () => {}
 }: Props) => {
   const shapeRef = React.useRef(null);
   const { setSelected } = useSelectedTransform();
-
-
+  const { updateItem: onChange } = useItems();
   return (
     <React.Fragment>
       <KonvaRect

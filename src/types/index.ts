@@ -13,6 +13,8 @@ export interface ITransform {
     id: string;
     x: number;
     y: number;
+    width?: number;
+    height?: number;
     draggable?: boolean;
     rotation?: number;
     scalable?: boolean;
@@ -20,31 +22,23 @@ export interface ITransform {
     sort: ItemSort;
 }
 
-export interface IFurnishing extends ITransform {
-    src: string;
-}
+
 
 export interface IImage extends ITransform {
     src: string;
 
 }
 
+export type IFurnishing = IImage;
+
 export interface IRect extends ITransform {
     width: number;
     height: number;
 }
 
-export interface IZone extends ITransform {
-    width: number;
-    height: number;
-}
+export type IZone = IRect;
 
 export type SelectableItem = IZone | IFurnishing;
-
-export enum PrimitiveType {
-    Rectangle,
-    Circle,
-}
 
 export interface TransformRef {
     nodes: (d: any) => void;

@@ -2,15 +2,26 @@ import React from "react"
 import { createContextForController } from "react-controller-context";
 import { ITransform } from "../types";
 import { sortBy } from "lodash";
+import { useSelectedTransform } from "./SelectedTransformProvider";
+
+const removeItem = (items:ITransform[], item?: ITransform) => items.filter(i => i.id !== item?.id);
+const sortItems = (items: ITransform[]) => sortBy(items, 'sort' );
 
 const useController = () => {
     const [ items, updateItems ] = React.useState<ITransform[]>([]);
-    const onChange = React.useCallback((item: ITransform) => {
+    const { selected, setSelected } = useSelectedTransform();
+    const updateItem = React.useCallback((item: ITransform) => {
         if(item){
-            updateItems(items => sortBy([
-                ...items.filter(i => i.id !== item.id),
+            updateItems(items => sortItems([
+                ...removeItem(items, item),
                 item
-            ], 'sort' ));
+            ]));
+        }
+    }, []);
+    const deleteItem = React.useCallback((item?: ITransform) => {
+        updateItems(items => sortItems(removeItem(items, item)));
+        if (selected?.id === item?.id) {
+            setSelected(undefined);
         }
     }, []);
     React.useEffect(() => {
@@ -18,7 +29,8 @@ const useController = () => {
     }, [items]);
     return {
         items,
-        onChange
+        updateItem,
+        deleteItem
     };
 };
 

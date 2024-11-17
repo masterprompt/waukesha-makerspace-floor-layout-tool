@@ -1,5 +1,3 @@
-import { IFurnishing, ItemSort, ItemType } from "../types";
-
 import mainBench from './Main-Bench.png';
 import heavyMetalShelf from './heavyMetalShelf.png';
 import liquidsCabinet from './liquids-cabinet.png';
@@ -13,12 +11,6 @@ import modularShelvesNarrow from './modular-shelves-narrow.png';
 import modularShelvesWide from './modular-shelves-wide.png';
 import palletRacks from './pallet-racks.png';
 import wireRackShelves from './wire-rack-shelves.png';
-
-function randInt(min: number, max: number) {
-  const range = max-min;
-  return min + Math.floor(Math.random() * range);
-}
-
 const furniture: {[key: string]: string} = {
   mainBench,
   heavyMetalShelf1:heavyMetalShelf,
@@ -40,17 +32,4 @@ const furniture: {[key: string]: string} = {
   wireRackShelves2: wireRackShelves,
 };
 
-const images: IFurnishing[] = [
-      ...Object.keys(furniture).map(k => ({
-        id: k,
-        x: randInt(-602, 1354),
-        y: randInt(-594, 516),
-        src: furniture[k],
-        draggable: true,
-        rotation: 0,
-        type: ItemType.IMAGE,
-        sort: ItemSort.FURNITURE
-      }))
-];
-
-export default images;
+export default furniture;

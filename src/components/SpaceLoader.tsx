@@ -16,7 +16,7 @@ const space: IImage = {
 }
 
 export const SpaceLoader = () => {
-    const { onChange } = useItems();
+    const { updateItem: onChange } = useItems();
     React.useEffect(() => {
         onChange(space);
     }, [space])
