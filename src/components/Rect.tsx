@@ -1,15 +1,15 @@
 import React from 'react';
-import { Rect } from 'react-konva';
-import { IZone, ShapeRef } from '../types';
+import { Rect as KonvaRect } from 'react-konva';
+import { IRect, IZone, ShapeRef } from '../types';
 import { useSelectedTransform } from './SelectedTransformProvider';
 import { ItemTransformer } from './ItemTransformer';
 
 interface Props {
-    item: IZone;
+    item: IRect;
     onChange?: (zone: IZone) => void;
 }
 
-export const Zone = ({
+export const Rect = ({
     item,
     onChange = () => {}
 }: Props) => {
@@ -19,7 +19,7 @@ export const Zone = ({
 
   return (
     <React.Fragment>
-      <Rect
+      <KonvaRect
         x={item.x}
         y={item.y}
         width={item.width}

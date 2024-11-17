@@ -1,103 +1,51 @@
-import { Image as KonvaImage, Transformer } from 'react-konva';
+import { Image as KonvaImage } from 'react-konva';
 import useImage from 'use-image';
-import { IFurnishing } from '../types';
+import { IFurnishing, IImage } from '../types';
 import React from 'react';
-import { useFurniture } from './FurnitureProvider';
+import { useSelectedTransform } from './SelectedTransformProvider';
+import { ItemTransformer } from './ItemTransformer';
+import { useItems } from './ItemsProvider';
 
 interface Props {
-  image: IFurnishing;
-  onSelect: () => void;
-  selected: boolean;
-}
-
-interface TransformRef {
-  nodes: (d: any) => void;
-  getLayer: () => {
-    batchDraw: () => void;
-  };
-}
-interface ShapeRef {
-  rotation: () => number;
+  item: IImage;
+  onChange?: (item: IFurnishing) => void;
 }
 
 export const Image = ({
-  image,
-  onSelect = () => {},
-  selected,
+  item,
 }: Props) => {
-  const [img] = useImage(image.src);
+  const [img] = useImage(item.src);
   const shapeRef = React.useRef(null);
-  const trRef = React.useRef(null);
-  const { setDirty } = useFurniture();
-  React.useEffect(() => {
-    if (selected) {
-      const transformRef = trRef.current as unknown as TransformRef;
-      // we need to attach transformer manually
-      transformRef.nodes([shapeRef.current]);
-      transformRef.getLayer().batchDraw();
-    }
-  }, [selected]);
-  const rotationSnaps = React.useMemo(() => {
-    const angles:number[] = [];
-    const amount = 22.5;
-    for(let i=0; i<=360; i+=amount){
-      angles.push(i);
-    }
-    return angles;
-  }, []);
+  const { setSelected } = useSelectedTransform();
+  const { onChange } = useItems();
   return (
     <>
     <KonvaImage
       image={img}
-      x={image.x}
-      y={image.y}
+      x={item.x}
+      y={item.y}
       // I will use offset to set origin to the center of the image
       offsetX={img ? img.width / 2 : 0}
       offsetY={img ? img.height / 2 : 0}
-      rotation={image?.rotation || 0}
-      draggable={image.draggable}
-      onClick={() => image.draggable ? onSelect() : () => {}}
-      onTap={() => image.draggable ? onSelect() : () => {}}
+      rotation={item?.rotation || 0}
+      draggable={item.draggable ? true : false}
+      onClick={() => setSelected(item)}
+      onTap={() => setSelected(item)}
       ref={shapeRef}
+      onDragStart={() => {
+        setSelected(item);
+      }}
       onDragEnd={(e) => {
-        image.x = e.target.x();
-        image.y = e.target.y();
-        setDirty();
+        item.x = e.target.x();
+        item.y = e.target.y();
+        onChange({...item});
       }}
     />
-      {selected && (
-        <Transformer
-          ref={trRef}
-          flipEnabled={false}
-          rotateEnabled={true}
-          resizeEnabled={false}
-          rotationSnaps={rotationSnaps}
-          rotationSnapTolerance={20}
-          onTransformEnd={() => {
-            const node = shapeRef.current as unknown as ShapeRef;
-            const newRotation = node.rotation();
-            image.rotation = newRotation;
-            setDirty();
-          }}
-        />
-      )}
+      <ItemTransformer
+        transform={item}
+        shapeReference={shapeRef}
+        onChange={(transform) => onChange({...item, ...transform})}
+      />
     </>
   );
 };
-
-export const Images = () => {
-  const { furniture } = useFurniture();
-  const [ selected, setSelected ] = React.useState<IFurnishing['id'] | null>(null);
-  return (
-    <>
-      {furniture.map((image) => (
-        <Image
-          image={image}
-          key={image.id}
-          selected={selected === image.id}
-          onSelect={() => setSelected(image.id)}
-        />
-      ))}
-    </>
-  )
-}

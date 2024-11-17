@@ -1,3 +1,14 @@
+export enum ItemType {
+    RECT = 'z',
+    IMAGE = 'i'
+}
+
+export enum ItemSort {
+    BASE = 0,
+    ZONE = 1,
+    FURNITURE = 2
+}
+
 export interface ITransform {
     id: string;
     x: number;
@@ -5,11 +16,22 @@ export interface ITransform {
     draggable?: boolean;
     rotation?: number;
     scalable?: boolean;
+    type: ItemType;
+    sort: ItemSort;
 }
 
 export interface IFurnishing extends ITransform {
     src: string;
+}
 
+export interface IImage extends ITransform {
+    src: string;
+
+}
+
+export interface IRect extends ITransform {
+    width: number;
+    height: number;
 }
 
 export interface IZone extends ITransform {
@@ -22,24 +44,6 @@ export type SelectableItem = IZone | IFurnishing;
 export enum PrimitiveType {
     Rectangle,
     Circle,
-}
-
-export interface IPrimitive extends ITransform {
-    type: PrimitiveType;
-    fill: string;
-}
-
-export interface IRectangle extends IPrimitive {
-    width: number;
-    height: number;
-}
-
-export interface ICircle extends IPrimitive {
-    radius: number;
-}
-
-export interface IShape {
-    primitives: IPrimitive[];
 }
 
 export interface TransformRef {

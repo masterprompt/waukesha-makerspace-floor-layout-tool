@@ -5,8 +5,8 @@ import { Vector2d } from 'konva/lib/types';
 import { useDownloadImage } from './DownloadImageProvider';
 import { useZoom } from './ZoomProvider';
 import useMeasure from 'react-use-measure';
-import { Furnishings } from './Furnishings';
-
+import { Items } from './Items';
+import { Loaders } from './Loaders';
 
 export const Stage = () => {
   const { scale, zoom } = useZoom();
@@ -24,6 +24,7 @@ export const Stage = () => {
 
   return (
     <div style={{ width: '100%', height: '100%'}} ref={ref}>
+    <Loaders />
     <KonvaStage
       width={bounds.width}
       height={bounds.height}
@@ -34,7 +35,7 @@ export const Stage = () => {
       ref={konvaRef}
     >
       <Layer>
-        <Furnishings />
+        <Items />
       </Layer>
     </KonvaStage>
     </div>

@@ -1,6 +1,5 @@
-import { IFurnishing } from "../types";
+import { IFurnishing, ItemSort, ItemType } from "../types";
 
-import floorPlanImage from './floor-plan.jpg';
 import mainBench from './Main-Bench.png';
 import heavyMetalShelf from './heavyMetalShelf.png';
 import liquidsCabinet from './liquids-cabinet.png';
@@ -42,22 +41,15 @@ const furniture: {[key: string]: string} = {
 };
 
 const images: IFurnishing[] = [
-    {
-        id: 'floorPlanImage',
-        x: 0,
-        y: 0,
-        src: floorPlanImage,
-        draggable: false,
-        scalable: false,
-        rotation: 90
-      },
       ...Object.keys(furniture).map(k => ({
         id: k,
         x: randInt(-602, 1354),
         y: randInt(-594, 516),
         src: furniture[k],
         draggable: true,
-        rotation: 0
+        rotation: 0,
+        type: ItemType.IMAGE,
+        sort: ItemSort.FURNITURE
       }))
 ];
 

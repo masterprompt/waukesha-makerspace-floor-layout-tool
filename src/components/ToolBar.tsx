@@ -2,6 +2,8 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { DownloadImageButton } from './DownloadImageButton';
 import { ZoomButton } from './ZoomButton';
 import { ShareLayoutButton } from './ShareLayoutButton';
+import { AddZoneButton } from './AddZoneButton';
+import { DeleteZoneButton } from './DeleteZoneButton';
 
 export const ToolBar = () => {
     return (
@@ -17,6 +19,8 @@ export const ToolBar = () => {
             <ButtonGroup size="sm">
                 <ZoomButton direction={-1} />
                 <ZoomButton direction={1} />
+                <AddZoneButton />
+                <DeleteZoneButton />
                 <DownloadImageButton />
                 <ShareLayoutButton />
             </ButtonGroup>

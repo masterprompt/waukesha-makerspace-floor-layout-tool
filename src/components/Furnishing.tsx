@@ -7,12 +7,12 @@ import { ItemTransformer } from './ItemTransformer';
 
 interface Props {
   item: IFurnishing;
-  onChange: (item: IFurnishing) => void;
+  onChange?: (item: IFurnishing) => void;
 }
 
 export const Furnishing = ({
   item,
-  onChange,
+  onChange = () => {},
 }: Props) => {
   const [img] = useImage(item.src);
   const shapeRef = React.useRef(null);

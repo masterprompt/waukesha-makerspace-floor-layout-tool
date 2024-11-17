@@ -11,6 +11,7 @@ const useController = () => {
     const setDirty = () => setTicks(ticks => ticks + 1);
     const layout = React.useMemo(() => layoutService.generateFurnitureLayoutBase64(furniture), [ticks]);
     const onChange = React.useCallback((item: IFurnishing) => {
+        console.log('item:', item)
         if(item){
             setFurniture(furniture => [
                 ...furniture.filter(f => f.id !== item.id),
