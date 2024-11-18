@@ -1,20 +1,17 @@
-import { Button } from "react-bootstrap"
 import { FilePlus as Icon } from 'react-bootstrap-icons';
 import { useItems } from "./ItemsProvider";
-import { useZoneService } from "../hooks/useZoneService";
+import { ToolbarDropdownIconButton } from "./ToolbarDropdownIconButton";
+import { useItemService } from '../services/ItemService';
 
 export const AddZoneButton = () => {
     const { updateItem } = useItems();
-    const zoneService = useZoneService();
+    const itemService = useItemService();
     const onClick = () => {
-        updateItem(zoneService.createZone('Zone'))
+        updateItem(itemService.createZone())
     }
     return (
-        <Button
-            onClick={() => onClick()}
-            title="Add Zone"
-        >
-            <Icon />
-        </Button>
+        <ToolbarDropdownIconButton icon={Icon} onClick={onClick}>
+            New Zone
+        </ToolbarDropdownIconButton>
     );
 };

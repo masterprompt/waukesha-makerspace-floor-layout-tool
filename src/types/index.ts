@@ -1,12 +1,14 @@
 export enum ItemType {
-    RECT = 'z',
-    IMAGE = 'i'
+    RECT = 'r',
+    IMAGE = 'i',
+    LABEL = 'l'
 }
 
 export enum ItemSort {
     BASE = 0,
     ZONE = 1,
-    FURNITURE = 2
+    FURNITURE = 2,
+    LABEL = 3
 }
 
 export interface ITransform {
@@ -36,9 +38,18 @@ export interface IRect extends ITransform {
     height: number;
 }
 
-export type IZone = IRect;
+interface IColored {
+    color?: string;
+}
 
-export type SelectableItem = IZone | IFurnishing;
+interface ILabeled {
+    label: string;
+}
+
+export type IZone = IRect & IColored;
+export type ILabel = IRect & ILabeled & IColored;
+
+export type SelectableItem = IRect | IZone | IFurnishing | ILabel;
 
 export interface TransformRef {
     nodes: (d: any) => void;

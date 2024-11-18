@@ -24,7 +24,7 @@ export const ShareLayoutModal = ({
         toast('Copied to clipboard!');
     }
     return !visible ? null : (
-        <Modal show={visible} onHide={() => onClose()}>
+        <Modal show={visible} onHide={() => onClose()} centered>
             <Modal.Header closeButton>
             <Modal.Title>Share Layout</Modal.Title>
             </Modal.Header>

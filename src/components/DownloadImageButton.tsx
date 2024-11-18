@@ -1,15 +1,15 @@
-import { Button } from "react-bootstrap"
 import { useDownloadImage } from "./DownloadImageProvider"
 import { Download as Icon } from 'react-bootstrap-icons';
+import { ToolbarDropdownIconButton } from "./ToolbarDropdownIconButton";
 
 export const DownloadImageButton = () => {
     const { downloadImage } = useDownloadImage();
     return (
-        <Button
+        <ToolbarDropdownIconButton
             onClick={() => downloadImage()}
-            title="Download Image"
+            icon={Icon}
         >
-            <Icon />
-        </Button>
+            Download Image
+        </ToolbarDropdownIconButton>
     )
 }

@@ -1,18 +1,18 @@
 import React from "react";
-import { Button } from "react-bootstrap"
 import { Share as Icon } from 'react-bootstrap-icons';
 import { ShareLayoutModal } from "./ShareLayoutModal";
+import { ToolbarDropdownIconButton } from "./ToolbarDropdownIconButton";
 
 export const ShareLayoutButton = () => {
     const [ visible, setVisible] = React.useState(false);
     return (
         <>
-            <Button
-                title='Share Layout'
+            <ToolbarDropdownIconButton
+                icon={Icon}
                 onClick={() => setVisible(true)}
             >
-                <Icon />
-            </Button>
+                Share Layout
+            </ToolbarDropdownIconButton>
             <ShareLayoutModal visible={visible} onClose={() => setVisible(false)} />
         </>
     )
