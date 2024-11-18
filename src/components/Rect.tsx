@@ -22,7 +22,7 @@ export const Rect = ({
         width={item.width}
         height={item.height}
         id={item.id}
-        stroke='#fccb00'
+        stroke={item.color}
         strokeWidth={5}
 
         onClick={() => setSelected(item)}

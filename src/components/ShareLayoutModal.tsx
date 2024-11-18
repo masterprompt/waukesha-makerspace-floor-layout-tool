@@ -3,7 +3,6 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { Copy } from 'react-bootstrap-icons';
-import { useFurniture } from './FurnitureProvider';
 import { useLayoutService } from '../hooks/useLayoutService';
 import { toast } from 'react-toastify';
 
@@ -16,7 +15,7 @@ export const ShareLayoutModal = ({
     visible,
     onClose = () => {}
 }: Props) => {
-    const { layout } = useFurniture();
+    const layout = '123';
     const layoutService = useLayoutService();
     const url = layoutService.getLayoutUrl(layout);
     const onCopy = async () => {

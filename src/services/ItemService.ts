@@ -5,7 +5,7 @@ import { uniqueId } from 'lodash';
 export const useItemService = () => React.useMemo(() => new ItemService(), []);
 
 class ItemService {
-    createZone (): IZone {
+    createZone (color: string): IZone {
         return {
             id: uniqueId().toString(),
             x: 0, y: 0,
@@ -14,7 +14,8 @@ class ItemService {
             sort: ItemSort.ZONE,
             draggable: true,
             rotation: 0,
-            scalable: true
+            scalable: true,
+            color
         }
     }
     createLabel (label: string, color: string): ILabel {

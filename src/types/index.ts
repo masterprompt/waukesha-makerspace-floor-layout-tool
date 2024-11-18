@@ -36,18 +36,15 @@ export type IFurnishing = IImage;
 export interface IRect extends ITransform {
     width: number;
     height: number;
-}
-
-interface IColored {
-    color?: string;
+    color: string;
 }
 
 interface ILabeled {
     label: string;
 }
 
-export type IZone = IRect & IColored;
-export type ILabel = IRect & ILabeled & IColored;
+export type IZone = IRect;
+export type ILabel = IRect & ILabeled;
 
 export type SelectableItem = IRect | IZone | IFurnishing | ILabel;
 
